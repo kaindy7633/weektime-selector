@@ -1,12 +1,15 @@
 import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Thing } from '../.';
+import { Toggle } from '../src/index';
+import { useState } from 'react';
 
 const App = () => {
+  const [isOn, setIsOn] = useState(false);
+
   return (
     <div>
-      <Thing />
+      <Toggle isOn={isOn} handleChange={() => setIsOn(!isOn)} />
     </div>
   );
 };
