@@ -1,0 +1,63 @@
+.wt-selector {
+  display: inline-block;
+  min-width: 100%;
+  position: relative;
+  .wt-schedue {
+    background-color: #598fe6;
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: .4;
+    pointer-events: none;
+  }
+  .wt-selector-table {
+    width: 100%;
+    border-collapse: collapse;
+    th {
+      vertical-align: inherit;
+      // font-weight: bold;
+    }
+    tr {
+      height: 30px;
+    }
+    tr, td, th {
+      user-select: none;
+      border: 1px solid #dee4f5;
+      // text-align: center;
+      min-width: 12px;
+      line-height: 1.8em;
+    }
+    .wk-selector-head {
+      font-size: 12px;
+      tr th.wk-td {
+        width: 100px;
+      }
+      th.prompt-copy {
+        text-align: right;
+      }
+    }
+    .wk-selector-body {
+      font-size: 12px;
+      td {
+        &.wt-td-selected {
+          background-color: #355FD2;
+        }
+      }
+    }
+  }
+  .gold-time-selector {
+    button {
+      display: block;
+      height: 40px;
+      margin-top: 30px;
+      margin-right: 15px;
+      margin-bottom: 20px;
+      border: 1px solid #f5f5f5;
+      background-color: #f5f5f5;
+      border-radius: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+      float: right;
+    }
+  }
+}
