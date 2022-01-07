@@ -1,17 +1,17 @@
 import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Toggle } from '../src/index';
-import { useState } from 'react';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
 
-const App = () => {
-  const [isOn, setIsOn] = useState(false);
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
 
-  return (
-    <div>
-      <Toggle isOn={isOn} handleChange={() => setIsOn(!isOn)} />
-    </div>
-  );
-};
-
-ReactDOM.render(<App />, document.getElementById('root'));
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
