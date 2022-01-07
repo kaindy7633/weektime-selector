@@ -13,7 +13,7 @@ export interface ISelectedData {
 
 /** 核心组件的 Props */
 export interface IWeektimeSelectorProps {
-  weektimeData: IWeektimeDataItem[];
+  weektimeData?: IWeektimeDataItem[];
   selectedData: any[];
   setSelectedData: (fn: any) => any;
   clearData: () => void;

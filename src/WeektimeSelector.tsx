@@ -4,16 +4,28 @@ import {
   ITdData,
   IWeektimeDataItem,
 } from './interface';
-import { createRange, filterChild } from './utils';
+import { createChild, createRange, filterChild } from './utils';
 import './styles.less';
 
+import { weekList } from './config';
+
 const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
-  weektimeData,
   selectedData,
   setSelectedData,
   clearData,
   selectGoldTime,
 }): React.ReactElement => {
+  // 生成 weektimeData 数据源
+  const [weektimeData, setWeektimeData] = useState<IWeektimeDataItem[]>(
+    weekList.map((_v: string, _i: number) => {
+      return {
+        value: _v,
+        row: _i,
+        child: createChild(_v, _i, 48),
+      };
+    })
+  );
+
   const [theadRange, setTheadRange] = useState<Array<number>>([]); // 时间Range
   const [mouseMode, setMouseMode] = useState<number>(0);
   const [width, setWidth] = useState<number>(0);
@@ -94,7 +106,6 @@ const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
 
   // 鼠标抬起
   const handleMouseUp = (td: ITdData) => {
-    // todo...
     if (td.col <= cCol && td.row <= cRow) {
       changeTdStatus([td.row, cRow], [td.col, cCol], !selected);
     }
@@ -155,7 +166,7 @@ const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
 
   // 返回用户是否选择了某些时间段
   const userSelected = () =>
-    selectedData.some((_r: { value: any }) => _r.value);
+    selectedData!.some((_r: { value: any }) => _r.value);
 
   return (
     <div className="wt-selector">

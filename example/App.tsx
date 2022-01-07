@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
-import WeektimeSelector from './components/WeektimeSelector';
+import WeektimeSelector from '../.';
 import { createChild, filterChild, weekList } from './utils';
 import { cloneDeep } from 'lodash';
+import React = require('react');
 
 export interface IWeektimeDataItem {
   value: string;
@@ -16,7 +17,7 @@ export interface ISelectedData {
   value: string | void;
 }
 
-function App() {
+const App: React.FC = () => {
   const [weektimeData, setWeektimeData] = useState<IWeektimeDataItem[]>(
     weekList.map((_value, _index) => {
       return {
@@ -96,6 +97,6 @@ function App() {
       />
     </div>
   );
-}
+};
 
 export default App;
