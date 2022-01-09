@@ -64,26 +64,26 @@ export const createChild = (
       end: formatWeektime(_col).split('-')[1],
       row: _row,
       col: _col,
-      selected: !_goldday ? false : handleGoldDay(_goldday, [_row, _col]),
+      // selected: !_goldday ? false : handleGoldDay(_goldday, [_row, _col]),
     };
   });
 };
 
-export const handleGoldDay = (_gd: string, local: any[]) => {
-  const [row, col] = local;
+// export const handleGoldDay = (_gd: string, local: any[]) => {
+//   const [row, col] = local;
 
-  if (_gd === 'work-day') {
-    if (row < 5 && col >= 18 && col <= 43) {
-      return true;
-    }
-  }
+//   if (_gd === 'work-day') {
+//     if (row < 5 && col >= 18 && col <= 43) {
+//       return true;
+//     }
+//   }
 
-  if (_gd === 'home-day') {
-    if (row > 4 && col >= 18 && col <= 43) {
-      return true;
-    }
-  }
-};
+//   if (_gd === 'home-day') {
+//     if (row > 4 && col >= 18 && col <= 43) {
+//       return true;
+//     }
+//   }
+// };
 
 export const filterChild = (list: any[]): string | void => {
   if (!list.length) return;

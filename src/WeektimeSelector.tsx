@@ -3,6 +3,7 @@ import {
   IWeektimeSelectorProps,
   ITdData,
   IWeektimeDataItem,
+  ISelectedData,
 } from './interface';
 import { createChild, createRange, filterChild } from './utils';
 import './styles.less';
@@ -10,13 +11,10 @@ import './styles.less';
 import { weekList } from './config';
 
 const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
-  selectedData,
-  setSelectedData,
-  clearData,
   selectGoldTime,
 }): React.ReactElement => {
   // 生成 weektimeData 数据源
-  const [weektimeData, setWeektimeData] = useState<IWeektimeDataItem[]>(
+  const [weektimeData] = useState<IWeektimeDataItem[]>(
     weekList.map((_v: string, _i: number) => {
       return {
         value: _v,
@@ -25,6 +23,9 @@ const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
       };
     })
   );
+
+  // 生成已选择的数据
+  const [selectedData, setSelectedData] = useState<ISelectedData[]>([]);
 
   const [theadRange, setTheadRange] = useState<Array<number>>([]); // 时间Range
   const [mouseMode, setMouseMode] = useState<number>(0);
@@ -40,6 +41,19 @@ const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
     // 生成时间 Range
     setTheadRange(createRange(24));
   }, []);
+
+  useEffect(() => {
+    // 当 weektimeData 发生变化时，更新 selectedData
+    setSelectedData(
+      weektimeData.map((_item: IWeektimeDataItem) => {
+        return {
+          id: _item.row,
+          name: _item.value,
+          value: filterChild(_item.child),
+        };
+      })
+    );
+  }, [weektimeData]);
 
   // 鼠标按下时
   const handleMouseDown = (td: ITdData) => {
@@ -160,8 +174,17 @@ const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
   };
 
   // 更换 td 背景色
-  const changeTdBG = (selected: boolean) => {
-    return selected ? 'wt-td-selected' : '';
+  // const changeTdBG = (selected: boolean) => {
+  //   return selected ? 'wt-td-selected' : '';
+  // };
+
+  // 清除已选数据
+  const clearData = () => {
+    weektimeData.forEach((_item) => {
+      _item.child.forEach((_c: any) => {
+        _c.selected = false;
+      });
+    });
   };
 
   // 返回用户是否选择了某些时间段

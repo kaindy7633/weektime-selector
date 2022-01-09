@@ -1,3 +1,7 @@
+/**
+ * @TODO: 考虑后面会把 weekList 数据做成可个性化配置里
+ *        默认为现有的方式，并支持国际化
+ */
 export const weekList = [
   '星期一',
   '星期二',
