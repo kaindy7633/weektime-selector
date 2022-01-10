@@ -11,7 +11,7 @@ import './styles.less';
 import { weekList } from './config';
 
 const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
-  selectGoldTime,
+  isShowSelected,
 }): React.ReactElement => {
   // 生成 weektimeData 数据源
   const [weektimeData] = useState<IWeektimeDataItem[]>(
@@ -40,6 +40,7 @@ const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
   useEffect(() => {
     // 生成时间 Range
     setTheadRange(createRange(24));
+    console.log('isShowSelected', isShowSelected);
   }, []);
 
   useEffect(() => {
@@ -191,6 +192,31 @@ const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
   const userSelected = () =>
     selectedData!.some((_r: { value: any }) => _r.value);
 
+  // 选中黄金时间
+  // const selectGoldTime = (type: string) => {
+  //   const _cloneData = cloneDeep(weektimeData);
+  //   const wLen = _cloneData.length;
+
+  //   const minTime = 18;
+  //   const maxTime = 41;
+  //   for (let i = 0; i < wLen; i++) {
+  //     if (type === 'work-day' && i < 5) {
+  //       for (let j = 0; j < _cloneData[i].child.length; j++) {
+  //         if (j >= minTime && j <= maxTime) {
+  //           _cloneData[i].child[j].selected = true;
+  //         }
+  //       }
+  //     } else if (type === 'home-day' && i > 4) {
+  //       for (let j = 0; j < _cloneData[i].child.length; j++) {
+  //         if (j >= minTime && j <= maxTime) {
+  //           _cloneData[i].child[j].selected = true;
+  //         }
+  //       }
+  //     }
+  //   }
+  //   setWeektimeData(_cloneData);
+  // };
+
   return (
     <div className="wt-selector">
       <div
@@ -311,7 +337,7 @@ const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
                   </span>
                 )}
               </div>
-              {
+              {isShowSelected && (
                 <div>
                   {selectedData.map((_it: any) => (
                     <div key={_it.id}>
@@ -326,24 +352,19 @@ const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
                     </div>
                   ))}
                 </div>
-              }
+              )}
             </td>
           </tr>
-          {/* <tr>
-              <td colSpan={49}>
-                <span>{JSON.stringify(selectedData)}</span>
-              </td>
-            </tr> */}
         </tbody>
       </table>
-      <div className="gold-time-selector">
+      {/* <div className="gold-time-selector">
         <button className="home-day" onClick={() => selectGoldTime('home-day')}>
           选中休息日黄金时间段
         </button>
         <button className="work-day" onClick={() => selectGoldTime('work-day')}>
           选中工作日黄金时间段
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -13,11 +13,12 @@ export interface ISelectedData {
 
 /** 核心组件的 Props */
 export interface IWeektimeSelectorProps {
+  isShowSelected?: boolean;
   weektimeData?: IWeektimeDataItem[];
-  selectedData: any[];
-  setSelectedData: (fn: any) => any;
-  clearData: () => void;
-  selectGoldTime: (type: string) => any;
+  selectedData?: any[];
+  setSelectedData?: (fn: any) => any;
+  clearData?: () => void;
+  selectGoldTime?: (type: string) => any;
 }
 
 /** 每一格数据 */
