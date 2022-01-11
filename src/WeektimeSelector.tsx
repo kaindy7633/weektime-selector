@@ -279,7 +279,7 @@ const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
           </tr>
           <tr>
             {theadRange.map((_t) => (
-              <td key={_t} colSpan={2}>
+              <td key={_t} colSpan={2} style={{ textAlign: 'center' }}>
                 {_t}
               </td>
             ))}
@@ -299,7 +299,7 @@ const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
               child: any[];
             }) => (
               <tr key={rData.row}>
-                <td>{rData.value}</td>
+                <td style={{ textAlign: 'center' }}>{rData.value}</td>
                 {rData.child.map((_td) => (
                   <td
                     key={`${_td.row}-${_td.col}`}
