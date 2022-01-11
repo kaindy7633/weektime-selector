@@ -11,6 +11,7 @@ import './styles.less';
 import { weekList } from './config';
 
 const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
+  isVisible = true,
   isShowSelected,
 }): React.ReactElement => {
   // 生成 weektimeData 数据源
@@ -217,7 +218,7 @@ const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
   //   setWeektimeData(_cloneData);
   // };
 
-  return (
+  return isVisible ? (
     <div className="wt-selector">
       <div
         className="wt-schedue"
@@ -278,7 +279,7 @@ const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
           </tr>
           <tr>
             {theadRange.map((_t) => (
-              <td key={_t} colSpan={2}>
+              <td key={_t} colSpan={2} style={{ textAlign: 'center' }}>
                 {_t}
               </td>
             ))}
@@ -298,7 +299,7 @@ const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
               child: any[];
             }) => (
               <tr key={rData.row}>
-                <td>{rData.value}</td>
+                <td style={{ textAlign: 'center' }}>{rData.value}</td>
                 {rData.child.map((_td) => (
                   <td
                     key={`${_td.row}-${_td.col}`}
@@ -366,6 +367,8 @@ const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
         </button>
       </div> */}
     </div>
+  ) : (
+    <div></div>
   );
 };
 
