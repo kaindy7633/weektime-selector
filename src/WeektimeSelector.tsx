@@ -13,6 +13,7 @@ import { weekList } from './config';
 const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
   isVisible = true,
   isShowSelected,
+  getSelectedData,
 }): React.ReactElement => {
   // 生成 weektimeData 数据源
   const [weektimeData] = useState<IWeektimeDataItem[]>(
@@ -41,7 +42,6 @@ const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
   useEffect(() => {
     // 生成时间 Range
     setTheadRange(createRange(24));
-    console.log('isShowSelected', isShowSelected);
   }, []);
 
   useEffect(() => {
@@ -56,6 +56,10 @@ const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
       })
     );
   }, [weektimeData]);
+
+  useEffect(() => {
+    getSelectedData(selectedData);
+  }, [selectedData]);
 
   // 鼠标按下时
   const handleMouseDown = (td: ITdData) => {
