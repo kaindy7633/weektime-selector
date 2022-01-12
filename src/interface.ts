@@ -15,6 +15,7 @@ export interface ISelectedData {
 export interface IWeektimeSelectorProps {
   isVisible?: boolean; // 是否显示该组件
   isShowSelected?: boolean; // 是否显示已选择的数据
+  getSelectedData: (data: Array<ISelectedData>) => void;
   weektimeData?: IWeektimeDataItem[];
   selectedData?: any[];
   setSelectedData?: (fn: any) => any;
