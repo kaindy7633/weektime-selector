@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useState } from 'react';
 import React = require('react');
 import { ISelectedData } from '../src/interface';
@@ -5,9 +6,9 @@ import WeektimeSelector from '../src/WeektimeSelector';
 
 const App: React.FC = () => {
   const [data, setData] = useState<ISelectedData[]>([]);
-  const getData = (value: ISelectedData[]) => {
+  const getData = useCallback((value: ISelectedData[]) => {
     setData(value);
-  };
+  }, []);
 
   return (
     <div className="App">
