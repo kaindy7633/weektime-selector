@@ -9,9 +9,16 @@ afterEach(cleanup);
 const getSelectedData = () => {};
 
 describe('should be test weektime selector component', () => {
-  render(<WeektimeSelector getSelectedData={getSelectedData} />);
+  it('should take a snapshot', () => {
+    const { asFragment } = render(
+      <WeektimeSelector getSelectedData={getSelectedData} />
+    );
+    expect(asFragment()).toMatchSnapshot();
+  });
 
   it('test some text rendered', () => {
+    render(<WeektimeSelector getSelectedData={getSelectedData} />);
+
     expect(screen.getByText(/已选/i)).toBeInTheDocument;
     expect(screen.getByText(/可选/i)).toBeInTheDocument;
     expect(screen.getByText(/星期\/时间/i)).toBeInTheDocument;
