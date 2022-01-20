@@ -307,6 +307,7 @@ const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
                 {rData.child.map((_td) => (
                   <td
                     key={`${_td.row}-${_td.col}`}
+                    data-testid={`tid-${_td.row}-${_td.col}`}
                     className={`td-${_td.row}-${_td.col}`}
                     style={_td.selected ? { backgroundColor: '#355FD2' } : {}}
                     data-week={_td.row}
