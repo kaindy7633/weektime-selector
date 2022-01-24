@@ -21,6 +21,7 @@ export interface IWeektimeSelectorProps {
   setSelectedData?: (fn: any) => any;
   clearData?: () => void;
   selectGoldTime?: (type: string) => any;
+  minWidth?: number;
 }
 
 /** 每一格数据 */
