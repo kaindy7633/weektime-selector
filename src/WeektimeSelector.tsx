@@ -14,6 +14,7 @@ const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
   isVisible = true,
   isShowSelected,
   getSelectedData,
+  minWidth = 830,
 }): React.ReactElement => {
   // 生成 weektimeData 数据源
   const [weektimeData] = useState<IWeektimeDataItem[]>(
@@ -223,7 +224,7 @@ const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
   // };
 
   return isVisible ? (
-    <div className="wt-selector">
+    <div className="wt-selector" style={{ minWidth }}>
       <div
         className="wt-schedue"
         style={{
