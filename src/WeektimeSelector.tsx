@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import classnames from 'classnames';
 import {
   IWeektimeSelectorProps,
   ITdData,
@@ -309,8 +310,11 @@ const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
                   <td
                     key={`${_td.row}-${_td.col}`}
                     data-testid={`tid-${_td.row}-${_td.col}`}
-                    className={`td-${_td.row}-${_td.col}`}
-                    style={_td.selected ? { backgroundColor: '#355FD2' } : {}}
+                    className={classnames(
+                      `td-${_td.row}-${_td.col}`,
+                      _td.selected && 'selected'
+                    )}
+                    // style={_td.selected ? { backgroundColor: '#355FD2' } : {}}
                     data-week={_td.row}
                     data-time={_td.col}
                     onMouseDown={() => handleMouseDown(_td)}

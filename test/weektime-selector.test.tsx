@@ -43,5 +43,7 @@ describe('should be test weektime selector component', () => {
     // 获取第一个时间单元格
     const _td = getByTestId('tid-0-0');
     fireEvent.click(_td);
+    const classes = _td.getAttribute('class');
+    console.log(classes);
   });
 });
