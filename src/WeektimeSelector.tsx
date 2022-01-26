@@ -7,6 +7,7 @@ import {
   ISelectedData,
 } from './interface';
 import { createChild, createRange, filterChild } from './utils';
+import { cloneDeep } from 'lodash';
 import './styles.less';
 
 import { weekList } from './config';
@@ -15,6 +16,7 @@ const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
   isVisible = true,
   isShowSelected,
   getSelectedData,
+  selectAllWorkDayTime,
   minWidth = 830,
 }): React.ReactElement => {
   // 生成 weektimeData 数据源
@@ -62,6 +64,10 @@ const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
   useEffect(() => {
     getSelectedData(selectedData);
   }, [selectedData]);
+
+  useEffect(() => {
+    selectAllWorkDayTime && selectWorkDayTime();
+  }, [selectAllWorkDayTime]);
 
   // 鼠标按下时
   const handleMouseDown = (td: ITdData) => {
@@ -181,11 +187,6 @@ const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
     );
   };
 
-  // 更换 td 背景色
-  // const changeTdBG = (selected: boolean) => {
-  //   return selected ? 'wt-td-selected' : '';
-  // };
-
   // 清除已选数据
   const clearData = () => {
     weektimeData.forEach((_item) => {
@@ -199,30 +200,30 @@ const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
   const userSelected = () =>
     selectedData!.some((_r: { value: any }) => _r.value);
 
-  // 选中黄金时间
-  // const selectGoldTime = (type: string) => {
-  //   const _cloneData = cloneDeep(weektimeData);
-  //   const wLen = _cloneData.length;
+  // 选中工作日时间，09:00 ~ 18:00
+  const selectWorkDayTime = () => {
+    const _cloneData = cloneDeep(weektimeData);
+    const wLen = _cloneData.length;
 
-  //   const minTime = 18;
-  //   const maxTime = 41;
-  //   for (let i = 0; i < wLen; i++) {
-  //     if (type === 'work-day' && i < 5) {
-  //       for (let j = 0; j < _cloneData[i].child.length; j++) {
-  //         if (j >= minTime && j <= maxTime) {
-  //           _cloneData[i].child[j].selected = true;
-  //         }
-  //       }
-  //     } else if (type === 'home-day' && i > 4) {
-  //       for (let j = 0; j < _cloneData[i].child.length; j++) {
-  //         if (j >= minTime && j <= maxTime) {
-  //           _cloneData[i].child[j].selected = true;
-  //         }
-  //       }
-  //     }
-  //   }
-  //   setWeektimeData(_cloneData);
-  // };
+    const minTime = 16;
+    const maxTime = 35;
+    for (let i = 0; i < wLen; i++) {
+      for (let j = 0; j < _cloneData[i].child.length; j++) {
+        if (j >= minTime && j <= maxTime) {
+          _cloneData[i].child[j].selected = true;
+        }
+      }
+    }
+    setSelectedData(
+      _cloneData.map((_item: IWeektimeDataItem) => {
+        return {
+          id: _item.row,
+          name: _item.value,
+          value: filterChild(_item.child),
+        };
+      })
+    );
+  };
 
   return isVisible ? (
     <div className="wt-selector" style={{ minWidth }}>
