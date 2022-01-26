@@ -20,7 +20,7 @@ export interface IWeektimeSelectorProps {
   selectedData?: any[];
   setSelectedData?: (fn: any) => any;
   clearData?: () => void;
-  selectGoldTime?: (type: string) => any;
+  selectAllWorkDayTime?: boolean; // 选择所有的工作日时间 周一 ~ 周五，09:00-18:00
   minWidth?: number;
 }
 
