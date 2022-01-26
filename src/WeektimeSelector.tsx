@@ -203,7 +203,7 @@ const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
   // 选中工作日时间，09:00 ~ 18:00
   const selectWorkDayTime = () => {
     const _cloneData = cloneDeep(weektimeData);
-    const wLen = _cloneData.length;
+    const wLen = _cloneData.length - 2;
 
     const minTime = 16;
     const maxTime = 35;
