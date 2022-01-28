@@ -20,7 +20,7 @@ const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
   minWidth = 830,
 }): React.ReactElement => {
   // 生成 weektimeData 数据源
-  const [weektimeData] = useState<IWeektimeDataItem[]>(
+  const [weektimeData, setWeektimeData] = useState<IWeektimeDataItem[]>(
     weekList.map((_v: string, _i: number) => {
       return {
         value: _v,
@@ -205,7 +205,7 @@ const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
     const _cloneData = cloneDeep(weektimeData);
     const wLen = _cloneData.length - 2;
 
-    const minTime = 16;
+    const minTime = 18;
     const maxTime = 35;
     for (let i = 0; i < wLen; i++) {
       for (let j = 0; j < _cloneData[i].child.length; j++) {
@@ -214,15 +214,8 @@ const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
         }
       }
     }
-    setSelectedData(
-      _cloneData.map((_item: IWeektimeDataItem) => {
-        return {
-          id: _item.row,
-          name: _item.value,
-          value: filterChild(_item.child),
-        };
-      })
-    );
+
+    setWeektimeData(_cloneData);
   };
 
   return isVisible ? (
@@ -369,14 +362,6 @@ const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
           </tr>
         </tbody>
       </table>
-      {/* <div className="gold-time-selector">
-        <button className="home-day" onClick={() => selectGoldTime('home-day')}>
-          选中休息日黄金时间段
-        </button>
-        <button className="work-day" onClick={() => selectGoldTime('work-day')}>
-          选中工作日黄金时间段
-        </button>
-      </div> */}
     </div>
   ) : (
     <div></div>
