@@ -5,8 +5,6 @@ import WeektimeSelector from '../src/WeektimeSelector';
 
 const App: React.FC = () => {
   const [data, setData] = useState<ISelectedData[]>([]);
-  const [selectAllWorkDayTime, setSelectAllWorkDayTime] =
-    useState<boolean>(false);
 
   const getData = useCallback((value: ISelectedData[]) => {
     setData(value);
@@ -15,15 +13,7 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <h2 className="app-title">日期时间选择组件(React版本)</h2>
-      <WeektimeSelector
-        getSelectedData={getData}
-        selectAllWorkDayTime={selectAllWorkDayTime}
-      />
-      <p>
-        <button onClick={() => setSelectAllWorkDayTime(true)}>
-          选中所有工作日时间
-        </button>
-      </p>
+      <WeektimeSelector getSelectedData={getData} isShowSelectWorkdayTime />
 
       <div>
         {data &&

@@ -16,7 +16,7 @@ const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
   isVisible = true,
   isShowSelected,
   getSelectedData,
-  selectAllWorkDayTime,
+  isShowSelectWorkdayTime,
   minWidth = 830,
 }): React.ReactElement => {
   // 生成 weektimeData 数据源
@@ -64,10 +64,6 @@ const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
   useEffect(() => {
     getSelectedData(selectedData);
   }, [selectedData]);
-
-  useEffect(() => {
-    selectAllWorkDayTime && selectWorkDayTime();
-  }, [selectAllWorkDayTime]);
 
   // 鼠标按下时
   const handleMouseDown = (td: ITdData) => {
@@ -362,6 +358,11 @@ const WeektimeSelector: React.FC<IWeektimeSelectorProps> = ({
           </tr>
         </tbody>
       </table>
+      <p>
+        {isShowSelectWorkdayTime && (
+          <button onClick={() => selectWorkDayTime()}>选中工作日时间</button>
+        )}
+      </p>
     </div>
   ) : (
     <div></div>
